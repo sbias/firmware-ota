@@ -15,7 +15,7 @@ async def flash(filename, addr):
     fwfile = open(filename, "rb")
 
     print("connecting")
-    async with BleakClient(addr) as client:
+    async with BleakClient(addr, services=[SERVICE_UUID]) as client:
         done = asyncio.Event()
         async def cb(sender, data):
             buf = fwfile.read(512)
